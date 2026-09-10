@@ -1,0 +1,13 @@
+node_modules/
+dist/
+dist-electron/
+src-tauri/target/
+release/
+tests/.math-extract.cjs
+tests/.mx.cjs
+tests/.blocks.cjs
+tests/shot-*.png
+*.log
+.DS_Store
+.vscode/
+.idea/

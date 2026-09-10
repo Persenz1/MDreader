@@ -1,0 +1,233 @@
+/* Obsidian-style in-place block editing */
+
+.blocks {
+  padding-top: var(--space-4);
+  /* Room for hover chips on the left without clipping */
+  padding-left: 2px;
+}
+
+.block-view {
+  position: relative;
+  border-radius: 6px;
+  margin: 2px 0;
+  padding-left: 0;
+  transition: background 0.12s ease, box-shadow 0.12s ease;
+  cursor: text;
+}
+
+.block-view.editable:hover {
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.block-view.kind-math.editable:hover {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+/* Kind chip: top-right on hover — never clipped, never indents text */
+.block-gutter {
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  pointer-events: none;
+  z-index: 3;
+  transform: translateY(-10%);
+}
+
+.block-view.hovered .block-gutter {
+  opacity: 1;
+}
+
+.block-kind-chip {
+  display: inline-block;
+  font-size: 10px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent-text);
+  background: var(--bg-elevated);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 4px;
+  padding: 1px 6px;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.block-body {
+  min-width: 0;
+}
+
+.block-body > .block-html > :first-child {
+  margin-top: 0;
+}
+.block-body > .block-html > :last-child {
+  margin-bottom: 0;
+}
+
+/* Headings: no extra indent, clean left edge */
+.block-html h1,
+.block-html h2,
+.block-html h3,
+.block-html h4,
+.block-html h5,
+.block-html h6 {
+  margin-top: 0.55em;
+  margin-bottom: 0.35em;
+  padding-left: 0;
+  text-indent: 0;
+}
+
+.block-html h1 {
+  margin-top: 0.15em;
+}
+
+.block-html p {
+  margin: 0.35em 0;
+  padding-left: 0;
+  text-indent: 0;
+}
+
+.block-html .math-block {
+  margin: 0.7em 0;
+}
+
+.block-html pre.code-block {
+  margin: 0.7em 0;
+}
+
+.block-html table {
+  margin: 0.5em 0;
+}
+
+.block-html blockquote {
+  margin: 0.6em 0;
+}
+
+.block-html ul,
+.block-html ol {
+  margin: 0.4em 0;
+}
+
+/* Editing state */
+.block-editing {
+  margin: 8px 0;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.block-editing.kind-math {
+  border-color: color-mix(in srgb, var(--accent) 70%, #888);
+}
+
+.block-edit-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  background: var(--accent-soft);
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.block-edit-bar .block-kind {
+  font-weight: 600;
+  color: var(--accent-text);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.block-edit-hint {
+  flex: 1;
+  color: var(--text-muted);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.block-edit-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.block-edit-actions .btn {
+  height: 24px;
+  font-size: 12px;
+  padding: 0 8px;
+}
+
+.block-editor {
+  display: block;
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: vertical;
+  min-height: 72px;
+  padding: 12px 14px 16px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.65;
+  tab-size: 2;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.block-editor:focus {
+  outline: none;
+}
+
+/* Add-block button */
+.block-add {
+  display: block;
+  width: 100%;
+  margin: 16px 0 40px;
+  padding: 10px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.12s ease, color 0.12s ease, background 0.12s ease;
+}
+
+.block-add:hover {
+  border-color: var(--accent);
+  color: var(--accent-text);
+  background: var(--accent-soft);
+}
+
+/* Math blocks look especially "clickable to edit TeX” */
+.block-view.kind-math .block-html .math-block {
+  border-radius: 6px;
+  padding: 4px 0;
+}
+
+.block-view.kind-math.editable:hover .math-block {
+  outline: 1px dashed color-mix(in srgb, var(--accent) 35%, transparent);
+  outline-offset: 4px;
+}
+
+/* Frontmatter */
+.block-view.kind-frontmatter .block-html {
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+/* Hide gutter on small height blocks to reduce noise */
+.block-view.kind-hr .block-gutter {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.status-bar {
+  z-index: 30;
+}

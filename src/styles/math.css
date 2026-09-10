@@ -1,0 +1,133 @@
+/* Math typesetting layout */
+
+.article .math-inline {
+  display: inline;
+  vertical-align: baseline;
+  font-size: 1.02em;
+  margin: 0 0.06em;
+}
+
+.article .math-inline mjx-container {
+  display: inline-block;
+  vertical-align: baseline;
+  /* Keep CJK baseline alignment natural */
+  line-height: 1;
+}
+
+.article .math-block {
+  display: block;
+  text-align: center;
+  margin: 1.15em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.15em 0;
+  /* Avoid layout jump: reserve a little space */
+  min-height: 1.2em;
+  scrollbar-width: thin;
+}
+
+.article .math-block mjx-container[display="true"] {
+  display: block;
+  margin: 0 !important;
+  text-align: center;
+  max-width: 100%;
+}
+
+/* Equation numbers to the right */
+.article .math-block[data-numbered="true"] {
+  position: relative;
+}
+
+.article .math-block mjx-container {
+  color: var(--text);
+}
+
+/* Assistive MathML off-screen but present */
+.article mjx-assistive-mml {
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
+
+/* Error isolation UI */
+.article .math-error {
+  border: 1px solid color-mix(in srgb, var(--math-error) 35%, var(--border));
+  background: var(--math-error-bg);
+  border-radius: var(--radius);
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+
+/* Placeholder until CHTML arrives */
+.math-placeholder {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--text-muted);
+  opacity: 0.75;
+  font-style: normal;
+}
+
+.math-placeholder-block {
+  display: block;
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-size: 0.8em;
+  padding: 0.25em 0;
+}
+
+.article .math-inline.math-error {
+  display: inline-block;
+  padding: 0.1em 0.35em;
+  font-size: 0.92em;
+}
+
+.math-error-badge {
+  display: inline-block;
+  font-size: 0.75em;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  color: var(--math-error);
+  letter-spacing: 0.02em;
+  margin-right: 0.5em;
+}
+
+.math-error-src {
+  display: block;
+  margin-top: 0.35em;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.article .math-inline .math-error-src {
+  display: inline;
+  margin: 0;
+}
+
+/* Placeholder before typeset (avoid empty flash) */
+.article .math-block[data-typeset="pending"]:empty::after,
+.article .math-inline[data-typeset="pending"]:empty::after {
+  content: "";
+}
+
+/* MathJax menu / tooltip */
+.article mjx-container svg {
+  max-width: 100%;
+}
+
+/* Don't let a single wide formula blow the whole layout */
+.article .math-block {
+  max-width: 100%;
+}
+
+/* Better scale for display math in paper mode */
+[data-mode="paper"] .article .math-block {
+  margin: 1.35em 0;
+  font-size: 1.05em;
+}

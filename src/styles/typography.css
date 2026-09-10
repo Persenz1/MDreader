@@ -1,0 +1,380 @@
+/* Typography for research reading */
+
+.app-root {
+  font-family: var(--font-ui);
+  color: var(--text);
+  background: var(--bg);
+}
+
+/* ---------- Article surface ---------- */
+.article {
+  font-family: var(--font-body);
+  font-size: var(--article-size, 16px);
+  line-height: 1.75;
+  color: var(--text);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Center the reading column inside the content pane (fullscreen) */
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.article[data-width="normal"] {
+  max-width: var(--content-normal);
+}
+.article[data-width="wide"] {
+  max-width: var(--content-wide);
+}
+.article[data-width="full"] {
+  max-width: var(--content-full);
+}
+
+.article-inner {
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-5) 120px;
+}
+
+[data-mode="paper"] .article-inner {
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-6);
+  padding: 56px 64px 80px;
+  border-radius: 2px;
+}
+
+@media (max-width: 900px) {
+  [data-mode="paper"] .article-inner {
+    padding: 32px 24px 48px;
+  }
+}
+
+/* ---------- Headings ---------- */
+.article h1,
+.article h2,
+.article h3,
+.article h4,
+.article h5,
+.article h6 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+  margin: 1.8em 0 0.65em;
+  scroll-margin-top: 64px;
+  position: relative;
+}
+
+[data-mode="paper"] .article h1,
+[data-mode="paper"] .article h2,
+[data-mode="paper"] .article h3,
+[data-mode="paper"] .article h4 {
+  font-family: var(--font-paper);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.article h1:first-child {
+  margin-top: 0;
+}
+
+.article h1 {
+  font-size: 1.9em;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--border);
+}
+
+.article h2 {
+  font-size: 1.45em;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid var(--border);
+  margin-top: 2.2em;
+}
+
+.article h3 {
+  font-size: 1.18em;
+  font-weight: 600;
+  margin-top: 1.8em;
+}
+
+.article h4 {
+  font-size: 1.05em;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.article h5 {
+  font-size: 0.95em;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.article h6 {
+  font-size: 0.88em;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+/* Heading permalink: must NOT take layout space (was indenting H1) */
+.article h1,
+.article h2,
+.article h3,
+.article h4,
+.article h5,
+.article h6 {
+  position: relative;
+}
+
+.heading-anchor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  color: var(--text-muted) !important;
+  text-decoration: none !important;
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.article h1:hover .heading-anchor,
+.article h2:hover .heading-anchor,
+.article h3:hover .heading-anchor,
+.article h4:hover .heading-anchor,
+.article h5:hover .heading-anchor,
+.article h6:hover .heading-anchor {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  display: inline-block;
+  opacity: 0.55;
+  margin-right: 0.25em;
+  pointer-events: auto;
+  font-size: 0.85em;
+  vertical-align: baseline;
+}
+
+.heading-anchor:hover {
+  opacity: 1;
+  color: var(--accent) !important;
+}
+
+/* ---------- Paragraphs & text ---------- */
+.article p {
+  margin: 0 0 1em;
+}
+
+.article > *:last-child {
+  margin-bottom: 0;
+}
+
+.article strong {
+  font-weight: 650;
+}
+
+.article em {
+  font-style: italic;
+}
+
+.article del {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.article mark {
+  background: var(--mark-bg);
+  color: inherit;
+  padding: 0.05em 0.15em;
+  border-radius: 2px;
+}
+
+.article a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent);
+  transition: color 0.12s ease, text-decoration-color 0.12s ease;
+}
+
+.article a:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--link-hover);
+}
+
+.article hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.2em 0;
+}
+
+/* ---------- Lists ---------- */
+.article ul,
+.article ol {
+  margin: 0 0 1em;
+  padding-left: 1.5em;
+}
+
+.article li {
+  margin: 0.28em 0;
+}
+
+.article li > ul,
+.article li > ol {
+  margin-top: 0.28em;
+  margin-bottom: 0.28em;
+}
+
+.article ul.contains-task-list,
+.article ul.task-list {
+  list-style: none;
+  padding-left: 0.2em;
+}
+
+.article li.task-list-item,
+.article li:has(> input[type="checkbox"]) {
+  list-style: none;
+  margin-left: -0.2em;
+}
+
+.article input[type="checkbox"] {
+  margin-right: 0.45em;
+  accent-color: var(--accent);
+}
+
+/* ---------- Blockquote ---------- */
+.article blockquote {
+  margin: 1.2em 0;
+  padding: 0.75em 1.1em;
+  border-left: 3px solid var(--blockquote-border);
+  background: var(--blockquote-bg);
+  color: var(--text-secondary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.article blockquote > :first-child {
+  margin-top: 0;
+}
+.article blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Footnotes ---------- */
+.article .footnotes {
+  margin-top: 3em;
+  padding-top: 1em;
+  border-top: 1px solid var(--border);
+  font-size: 0.9em;
+  color: var(--text-secondary);
+}
+
+.article .footnote-ref a,
+.article .footnote-backref {
+  text-decoration: none;
+  font-size: 0.85em;
+  padding: 0 0.15em;
+}
+
+/* ---------- Front matter hint ---------- */
+.frontmatter {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-bottom: 1.2em;
+  padding: 0.5em 0.75em;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-hover);
+}
+
+.frontmatter span {
+  margin-right: 1em;
+}
+
+/* ---------- Images ---------- */
+.article p > img,
+.article img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.2em auto;
+  border-radius: 4px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+}
+
+.article p:has(> img:only-child) {
+  text-align: center;
+}
+
+.article figure {
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+.article figcaption {
+  font-size: 0.88em;
+  color: var(--text-muted);
+  margin-top: 0.5em;
+}
+
+/* Broken image placeholder */
+.article img.img-broken,
+img.img-broken {
+  min-height: 48px;
+  border-style: dashed;
+}
+
+/* ---------- Paragraph rhythm for mixed content ---------- */
+.article p + .math-block,
+.article .math-block + p {
+  /* math.css handles spacing */
+}
+
+/* CJK line-breaking friendliness */
+.article {
+  text-spacing-trim: trim-start;
+}
+
+/* Empty state / error */
+.empty-state,
+.error-banner {
+  max-width: 520px;
+  margin: 12vh auto;
+  text-align: center;
+  color: var(--text-secondary);
+  padding: var(--space-5);
+}
+
+.error-banner {
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  border-radius: var(--radius);
+  text-align: left;
+}
+
+.error-banner h3 {
+  margin: 0 0 0.5em;
+  color: var(--math-error);
+  font-size: 1em;
+}
+
+.error-banner pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-size: 0.85em;
+  color: var(--text-muted);
+}

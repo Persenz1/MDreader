@@ -1,0 +1,72 @@
+/* Tables — academic, restrained */
+
+.article .table-wrap {
+  margin: 1.3em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  scrollbar-width: thin;
+  max-width: 100%;
+}
+
+.article table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: max-content;
+  font-size: 0.92em;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+.article th,
+.article td {
+  padding: 0.5em 0.85em;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.article thead th {
+  background: var(--table-header-bg);
+  font-weight: 600;
+  font-size: 0.92em;
+  color: var(--text);
+  border-bottom: 1px solid var(--border-strong);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.article tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.article tbody tr:hover {
+  background: var(--table-row-hover);
+}
+
+.article td[align="right"],
+.article th[align="right"] {
+  text-align: right;
+}
+
+.article td[align="center"],
+.article th[align="center"] {
+  text-align: center;
+}
+
+/* Align pipes style: numbers often right in research tables via ---: */
+.article td:last-child:not(:first-child) {
+  /* no force; GFM alignment comes from markdown-it */
+}
+
+.article table .math-inline {
+  font-size: 1em;
+}
+
+.article table code {
+  font-size: 0.85em;
+}

@@ -1,0 +1,10 @@
+const fs = require('fs');
+const path = require('path');
+const html = fs.readFileSync('dist/index.html', 'utf8');
+const js = fs.readdirSync('dist/assets').find((f) => f.endsWith('.js'));
+const s = fs.readFileSync(path.join('dist/assets', js), 'utf8');
+console.log('js', js);
+console.log('v0.1.1', s.includes('v0.1.1'));
+console.log('block-edit-bar', s.includes('block-edit-bar'));
+console.log('block-editor', s.includes('block-editor'));
+console.log('就地', s.includes('就地') || s.includes('点击块编辑'));
