@@ -29,7 +29,14 @@ export function Toolbar(props: ToolbarProps): React.ReactElement {
   return (
     <header className="toolbar">
       <div className="toolbar-brand">
-        <span className="logo">MD</span>
+        <span className="logo" aria-hidden>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 3h9l5 5v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="#fff"/>
+            <path d="M14 3v5h5" fill="#c5e4de"/>
+            <path d="M9 10c-1.5 0-2 .8-2 1.8 0 2.2 3 2.2 3 4.4 0 1.2-.8 2-2 2" stroke="#1b5e56" strokeWidth="1.4" strokeLinecap="round"/>
+            <path d="M11.5 12h4M11.5 14h4" stroke="#1b5e56" strokeWidth="1.3" strokeLinecap="round"/>
+          </svg>
+        </span>
         <span>ResearchMD</span>
         <span className="brand-ver">v0.1.1</span>
         {props.dirty && (

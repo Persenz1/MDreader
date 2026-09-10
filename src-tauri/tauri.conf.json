@@ -39,6 +39,26 @@
     "category": "Productivity",
     "shortDescription": "Scientific Markdown reader",
     "longDescription": "ResearchMD is a lightweight desktop reader focused on high-quality LaTeX math rendering for scientific Markdown documents.",
+    "fileAssociations": [
+      {
+        "ext": ["md"],
+        "name": "Markdown",
+        "description": "Markdown Document",
+        "role": "Editor"
+      },
+      {
+        "ext": ["markdown"],
+        "name": "Markdown",
+        "description": "Markdown Document",
+        "role": "Editor"
+      },
+      {
+        "ext": ["mdx"],
+        "name": "MDX",
+        "description": "MDX Document",
+        "role": "Editor"
+      }
+    ],
     "windows": {
       "webviewInstallMode": {
         "type": "downloadBootstrapper"
