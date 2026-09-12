@@ -1,6 +1,6 @@
 [package]
 name = "researchmd"
-version = "0.1.2"
+version = "0.1.3"
 description = "A lightweight desktop reader for scientific Markdown with full MathJax LaTeX support"
 authors = ["ResearchMD"]
 edition = "2021"

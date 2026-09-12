@@ -43,7 +43,7 @@ export function Toolbar(props: ToolbarProps): React.ReactElement {
           </svg>
         </span>
         <span>ResearchMD</span>
-        <span className="brand-ver">v0.1.2</span>
+        <span className="brand-ver">v0.1.3</span>
         {props.dirty && (
           <span className="dirty-dot" title="有未保存修改">
             ●
