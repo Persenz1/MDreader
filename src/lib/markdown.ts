@@ -212,7 +212,17 @@ export function renderMarkdown(source: string, docDir?: string | null): RenderRe
     html = resolveImages(html, docDir);
   }
   const clean = DOMPurify.sanitize(html, SANITIZE_CONFIG as never) as unknown as string;
-  return { html: clean, toc: headingStore.items.slice() };
+  const wrapped = wrapTables(clean);
+  return { html: wrapped, toc: headingStore.items.slice() };
+}
+
+/** Wrap bare <table> so wide/tall tables get a bordered scroll viewport. */
+function wrapTables(html: string): string {
+  if (!html.includes('<table')) return html;
+  return html.replace(/(<table[\s\S]*?<\/table>)/gi, (full) => {
+    if (full.includes('table-wrap')) return full;
+    return `<div class="table-wrap" tabindex="0">${full}</div>`;
+  });
 }
 
 /** Extract YAML front matter (simple) */

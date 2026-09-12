@@ -1,34 +1,52 @@
-/* Tables — academic, restrained */
+/* Tables — academic, restrained, scrollable */
 
-.article .table-wrap {
-  margin: 1.3em 0;
-  overflow-x: auto;
-  overflow-y: hidden;
+.article .table-wrap,
+.block-html .table-wrap {
+  margin: 1.2em 0;
+  max-width: 100%;
+  width: 100%;
+  /* Both axes: wide tables + tall tables stay inside the article column */
+  max-height: min(70vh, 640px);
+  overflow: auto;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg-elevated);
   scrollbar-width: thin;
-  max-width: 100%;
+  scrollbar-gutter: stable;
+  position: relative;
+  /* Keep teal hover tint inside the box */
+  background-clip: padding-box;
 }
 
-.article table {
-  border-collapse: collapse;
-  width: 100%;
-  min-width: max-content;
+.block-view.kind-table.editable:hover .table-wrap {
+  /* parent already shows hover ring */
+}
+
+.article .table-wrap table,
+.block-html .table-wrap table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: max-content;
+  min-width: 100%;
   font-size: 0.92em;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
 }
 
-.article th,
-.article td {
+.article .table-wrap th,
+.article .table-wrap td,
+.block-html .table-wrap th,
+.block-html .table-wrap td {
   padding: 0.5em 0.85em;
   border-bottom: 1px solid var(--border);
+  border-right: 1px solid transparent;
   text-align: left;
   vertical-align: top;
+  background: var(--bg-elevated);
 }
 
-.article thead th {
+.article .table-wrap thead th,
+.block-html .table-wrap thead th {
   background: var(--table-header-bg);
   font-weight: 600;
   font-size: 0.92em;
@@ -37,36 +55,53 @@
   white-space: nowrap;
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
-.article tbody tr:last-child td {
+/* Corner cell sticks both ways */
+.article .table-wrap thead th:first-child,
+.block-html .table-wrap thead th:first-child {
+  left: 0;
+  z-index: 3;
+}
+
+.article .table-wrap tbody tr:last-child td,
+.block-html .table-wrap tbody tr:last-child td {
   border-bottom: none;
 }
 
-.article tbody tr:hover {
+.article .table-wrap tbody tr:hover td,
+.block-html .table-wrap tbody tr:hover td {
   background: var(--table-row-hover);
 }
 
-.article td[align="right"],
-.article th[align="right"] {
+.article .table-wrap td[align="right"],
+.article .table-wrap th[align="right"],
+.block-html .table-wrap td[align="right"],
+.block-html .table-wrap th[align="right"] {
   text-align: right;
 }
 
-.article td[align="center"],
-.article th[align="center"] {
+.article .table-wrap td[align="center"],
+.article .table-wrap th[align="center"],
+.block-html .table-wrap td[align="center"],
+.block-html .table-wrap th[align="center"] {
   text-align: center;
 }
 
-/* Align pipes style: numbers often right in research tables via ---: */
-.article td:last-child:not(:first-child) {
-  /* no force; GFM alignment comes from markdown-it */
-}
-
-.article table .math-inline {
+.article .table-wrap .math-inline,
+.block-html .table-wrap .math-inline {
   font-size: 1em;
 }
 
-.article table code {
+.article .table-wrap code,
+.block-html .table-wrap code {
   font-size: 0.85em;
+}
+
+/* Focus ring when keyboard-scrolling */
+.article .table-wrap:focus-visible,
+.block-html .table-wrap:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  outline-offset: 2px;
 }

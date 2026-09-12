@@ -31,17 +31,23 @@ export function Toolbar(props: ToolbarProps): React.ReactElement {
       <div className="toolbar-brand">
         <span className="logo" aria-hidden>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 3h9l5 5v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="#fff"/>
-            <path d="M14 3v5h5" fill="#c5e4de"/>
-            <path d="M9 10c-1.5 0-2 .8-2 1.8 0 2.2 3 2.2 3 4.4 0 1.2-.8 2-2 2" stroke="#1b5e56" strokeWidth="1.4" strokeLinecap="round"/>
-            <path d="M11.5 12h4M11.5 14h4" stroke="#1b5e56" strokeWidth="1.3" strokeLinecap="round"/>
+            <path d="M5 3h9l5 5v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="#fff" />
+            <path d="M14 3v5h5" fill="#c5e4de" />
+            <path
+              d="M9 10c-1.5 0-2 .8-2 1.8 0 2.2 3 2.2 3 4.4 0 1.2-.8 2-2 2"
+              stroke="#1b5e56"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+            />
+            <path d="M11.5 12h4M11.5 14h4" stroke="#1b5e56" strokeWidth="1.3" strokeLinecap="round" />
           </svg>
         </span>
         <span>ResearchMD</span>
         <span className="brand-ver">v0.1.2</span>
         {props.dirty && (
           <span className="dirty-dot" title="有未保存修改">
-            �?          </span>
+            ●
+          </span>
         )}
       </div>
 
@@ -50,8 +56,9 @@ export function Toolbar(props: ToolbarProps): React.ReactElement {
       <button className="btn" onClick={props.onOpenFile} title="打开文件 (Ctrl+O)">
         打开
       </button>
-      <button className="btn" onClick={props.onOpenFolder} title="打开文件�?(Ctrl+Shift+O)">
-        文件�?      </button>
+      <button className="btn" onClick={props.onOpenFolder} title="打开文件夹 (Ctrl+Shift+O)">
+        文件夹
+      </button>
 
       <div className="toolbar-divider" />
 
@@ -83,9 +90,10 @@ export function Toolbar(props: ToolbarProps): React.ReactElement {
       <button
         className={`btn ${props.showSidebar ? 'active' : ''}`}
         onClick={props.onToggleSidebar}
-        title="侧栏 (Ctrl+B，编辑器内为加粗)"
+        title="文件树 (Ctrl+B)"
       >
-        �?      </button>
+        文件树
+      </button>
       <button
         className={`btn ${props.showToc ? 'active' : ''}`}
         onClick={props.onToggleToc}
@@ -140,15 +148,44 @@ export function Toolbar(props: ToolbarProps): React.ReactElement {
       )}
 
       <button className="btn btn-icon" onClick={props.onZoomOut} title="缩小 (Ctrl+-)">
-        �?      </button>
-      <span style={{ fontSize: 11, color: 'var(--text-muted)', minWidth: 36, textAlign: 'center' }}>
+        <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden>
+          <path d="M3 8h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
+      </button>
+      <span
+        style={{
+          fontSize: 11,
+          color: 'var(--text-muted)',
+          minWidth: 40,
+          textAlign: 'center',
+        }}
+      >
         {props.zoom}%
       </span>
       <button className="btn btn-icon" onClick={props.onZoomIn} title="放大 (Ctrl++)">
-        +
+        <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden>
+          <path d="M3 8h10M8 3v10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
       </button>
-      <button className="btn btn-icon" onClick={props.onZoomReset} title="重置 (Ctrl+0)">
-        �?      </button>
+      <button className="btn btn-icon" onClick={props.onZoomReset} title="重置缩放 (Ctrl+0)">
+        <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden>
+          <path
+            d="M3.5 8a4.5 4.5 0 1 0 1.3-3.2"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+          />
+          <path
+            d="M3.2 3.2v3.2h3.2"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
     </header>
   );
 }
