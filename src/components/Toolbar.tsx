@@ -38,11 +38,10 @@ export function Toolbar(props: ToolbarProps): React.ReactElement {
           </svg>
         </span>
         <span>ResearchMD</span>
-        <span className="brand-ver">v0.1.1</span>
+        <span className="brand-ver">v0.1.2</span>
         {props.dirty && (
           <span className="dirty-dot" title="有未保存修改">
-            ●
-          </span>
+            �?          </span>
         )}
       </div>
 
@@ -51,9 +50,8 @@ export function Toolbar(props: ToolbarProps): React.ReactElement {
       <button className="btn" onClick={props.onOpenFile} title="打开文件 (Ctrl+O)">
         打开
       </button>
-      <button className="btn" onClick={props.onOpenFolder} title="打开文件夹 (Ctrl+Shift+O)">
-        文件夹
-      </button>
+      <button className="btn" onClick={props.onOpenFolder} title="打开文件�?(Ctrl+Shift+O)">
+        文件�?      </button>
 
       <div className="toolbar-divider" />
 
@@ -87,8 +85,7 @@ export function Toolbar(props: ToolbarProps): React.ReactElement {
         onClick={props.onToggleSidebar}
         title="侧栏 (Ctrl+B，编辑器内为加粗)"
       >
-        树
-      </button>
+        �?      </button>
       <button
         className={`btn ${props.showToc ? 'active' : ''}`}
         onClick={props.onToggleToc}
@@ -143,8 +140,7 @@ export function Toolbar(props: ToolbarProps): React.ReactElement {
       )}
 
       <button className="btn btn-icon" onClick={props.onZoomOut} title="缩小 (Ctrl+-)">
-        −
-      </button>
+        �?      </button>
       <span style={{ fontSize: 11, color: 'var(--text-muted)', minWidth: 36, textAlign: 'center' }}>
         {props.zoom}%
       </span>
@@ -152,8 +148,7 @@ export function Toolbar(props: ToolbarProps): React.ReactElement {
         +
       </button>
       <button className="btn btn-icon" onClick={props.onZoomReset} title="重置 (Ctrl+0)">
-        ⟲
-      </button>
+        �?      </button>
     </header>
   );
 }

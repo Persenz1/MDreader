@@ -6,6 +6,7 @@ release/
 tests/.math-extract.cjs
 tests/.mx.cjs
 tests/.blocks.cjs
+tests/.b.cjs
 tests/shot-*.png
 *.log
 .DS_Store

@@ -119,6 +119,15 @@ export default function App(): React.ReactElement {
         setDocName(name);
         setEditingBlockId(null);
         pushRecent(path);
+        // Taskbar / title bar shows the open document
+        void (async () => {
+          try {
+            const { getCurrentWindow } = await import('@tauri-apps/api/window');
+            await getCurrentWindow().setTitle(`${name} — ResearchMD`);
+          } catch {
+            document.title = `${name} — ResearchMD`;
+          }
+        })();
         if (path.replace(/[\\/][^\\/]+$/, '')) setPendingDir(path.replace(/[\\/][^\\/]+$/, ''));
 
         requestAnimationFrame(() => {
@@ -439,6 +448,25 @@ export default function App(): React.ReactElement {
     return () => window.removeEventListener('keydown', onKey);
   }, [openFile, openFolder, saveFile]);
 
+  // Ctrl+wheel zoom (content + editor)
+  useEffect(() => {
+    const onWheel = (e: WheelEvent) => {
+      if (!e.ctrlKey && !e.metaKey) return;
+      // Only when hovering content or editor
+      const t = e.target as HTMLElement | null;
+      if (!t?.closest('.content-area, .editor-pane, .article')) return;
+      e.preventDefault();
+      const dir = e.deltaY > 0 ? -1 : 1;
+      setSettings((s) => {
+        const next = Math.max(70, Math.min(160, s.zoom + dir * 10));
+        return next === s.zoom ? s : { ...s, zoom: next };
+      });
+    };
+    // passive:false so preventDefault works in WebView2
+    window.addEventListener('wheel', onWheel, { passive: false });
+    return () => window.removeEventListener('wheel', onWheel);
+  }, []);
+
   // When switching source textarea → read mode, re-parse blocks
   useEffect(() => {
     if (layout === 'read' && source) {
@@ -542,7 +570,7 @@ export default function App(): React.ReactElement {
           }
         />
 
-        <div className="content-stack layout-read">
+        <div className={`content-stack ${layout === 'source' ? 'layout-source' : 'layout-read'}`}>
           {welcome}
 
           {layout === 'source' ? (

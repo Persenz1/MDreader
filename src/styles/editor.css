@@ -1,5 +1,12 @@
 /* Markdown source editor */
 
+.content-stack.layout-source > .editor-pane {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+}
+
 .content-stack.layout-split {
   flex-direction: row;
   align-items: stretch;
@@ -26,6 +33,7 @@
   flex-direction: column;
   min-height: 0;
   min-width: 0;
+  flex: 1 1 auto;
   background: var(--bg-elevated);
   overflow: hidden;
 }
@@ -72,7 +80,7 @@
   background: var(--bg-elevated);
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 13.5px;
+  font-size: calc(13.5px * var(--zoom-factor, 1));
   line-height: 1.65;
   tab-size: 2;
   white-space: pre;

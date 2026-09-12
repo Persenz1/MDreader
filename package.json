@@ -1,6 +1,6 @@
 {
   "name": "researchmd",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A lightweight desktop reader for scientific Markdown with full MathJax LaTeX support",
   "type": "module",
   "scripts": {

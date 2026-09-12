@@ -9,7 +9,7 @@
 /* ---------- Article surface ---------- */
 .article {
   font-family: var(--font-body);
-  font-size: var(--article-size, 16px);
+  font-size: calc(var(--article-size, 16px) * var(--zoom-factor, 1));
   line-height: 1.75;
   color: var(--text);
   word-wrap: break-word;

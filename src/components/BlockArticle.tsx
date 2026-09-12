@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { renderMarkdown } from '../lib/markdown';
 import { typesetMathProgressive, cancelTypesetting } from '../lib/mathjax';
+import { renderMermaidBlocks } from '../lib/mermaid';
 import type { SourceBlock, BlockKind } from '../lib/blocks';
 
 export interface BlockArticleProps {
@@ -105,6 +106,10 @@ export function BlockArticle(props: BlockArticleProps): React.ReactElement {
     let cancel: (() => void) | null = null;
     const raf = requestAnimationFrame(() => {
       cancel = typesetMathProgressive(el);
+      // Mermaid after a paint so math/layout is not blocked
+      requestAnimationFrame(() => {
+        void renderMermaidBlocks(el);
+      });
     });
     return () => {
       cancelAnimationFrame(raf);

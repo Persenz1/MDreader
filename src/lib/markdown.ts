@@ -14,6 +14,10 @@ const md: MarkdownIt = new MarkdownIt({
   typographer: false,
   breaks: false,
   highlight: (code: string, lang: string) => {
+    const normalized = (lang || '').toLowerCase().trim();
+    if (normalized === 'mermaid') {
+      return `<div class="mermaid-block" data-mermaid="${escapeHtml(code)}"><pre class="mermaid-src">${escapeHtml(code)}</pre></div>`;
+    }
     const { html, language } = highlightCode(code, lang);
     return `<pre class="code-block" data-lang="${escapeHtml(language)}"><code class="hljs language-${escapeHtml(language)}">${html}</code></pre>`;
   },
